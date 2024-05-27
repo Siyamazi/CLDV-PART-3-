@@ -1,0 +1,76 @@
+﻿@model IEnumerable<CLDV_Part2.Models.Products>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<head>
+
+
+</head>
+@* <p>
+    <a asp-action="Create">Create New</a>
+
+</p> *@
+<div class="button">
+    <form asp-action="Create" asp-controller="Products" >
+       
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </form>
+</div>
+
+<style>
+   /*  body {
+        background: url('/images/blur.jpg') no-repeat center center fixed;
+        background-size: cover;
+    } */
+
+    .card {
+        width: 20%;
+        height: auto;
+        box-shadow: 4px 8px rgba(5, 5, 5, 0.64);
+        float: left;
+        margin-right: 38px;
+        margin-bottom: 20px;
+        background-color: white;
+        padding: 15px;
+        border-radius: 8px;
+
+    }
+
+    
+
+</style>
+<div class="Card">
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <img src="@item.ImageUrl" alt="Image of @item.Name" />
+                <p>Product: @Html.DisplayFor(modelItem => item.Name)</p>
+                <p>Description: @Html.DisplayFor(modelItem => item.Description)</p>
+                <p>Price: @Html.DisplayFor(modelItem => item.Price)</p>
+                <p>Stock Quantity: @Html.DisplayFor(modelItem => item.StockQuantity)</p>
+                @* <p>Image URL: @Html.DisplayFor(modelItem => item.ImageUrl)</p> *@
+
+                <div class="button">
+                   @*  <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> | *@
+
+
+                <div class="button">
+                    <form asp-action="Display" asp-controller="Products" method="post">
+                        <input type="hidden" name="productId" value="@item.ProductId" />
+                        <input type="submit" value="Add to Cart" class="btn btn-primary" />
+                    </form>
+                </div>
+                
+                    <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a> 
+                   @*  <a asp-action="Display" asp-route-id="@item.ProductId">Order</a> *@
+                </div>
+                </div>
+           
+        }
+    </div>
+    
+
